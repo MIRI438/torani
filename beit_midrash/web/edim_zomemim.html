@@ -1,0 +1,562 @@
+<title>עדים זוממים</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700;900&family=Noto+Serif+Hebrew:wght@400;500;600&family=Assistant:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #efe8d8;
+    --paper-raised: #f8f4e9;
+    --paper-line: #d8cdb2;
+    --ink: #2a2420;
+    --ink-soft: #6b5f4f;
+    --accent: #7a3242;
+    --accent-strong: #5c2432;
+    --accent-tint: #f1e0e0;
+    --tag-bg: #e4dcc5;
+    --tag-ink: #5a4f3a;
+
+    --tint-0: #b08a3e;
+    --tint-1: #8a7a3f;
+    --tint-2: #7a5a44;
+    --tint-3: #7a3242;
+
+    --shadow: 0 1px 2px rgba(42,36,32,.06), 0 6px 20px -8px rgba(42,36,32,.18);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #1a1613;
+      --paper-raised: #221d19;
+      --paper-line: #3a3129;
+      --ink: #e9e1d1;
+      --ink-soft: #ab9d86;
+      --accent: #e08a9a;
+      --accent-strong: #f0a8b6;
+      --accent-tint: #3a2126;
+      --tag-bg: #2c2620;
+      --tag-ink: #cabb9c;
+
+      --tint-0: #d8b16a;
+      --tint-1: #b6a568;
+      --tint-2: #ab8570;
+      --tint-3: #e08a9a;
+
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -8px rgba(0,0,0,.5);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #1a1613;
+    --paper-raised: #221d19;
+    --paper-line: #3a3129;
+    --ink: #e9e1d1;
+    --ink-soft: #ab9d86;
+    --accent: #e08a9a;
+    --accent-strong: #f0a8b6;
+    --accent-tint: #3a2126;
+    --tag-bg: #2c2620;
+    --tag-ink: #cabb9c;
+
+    --tint-0: #d8b16a;
+    --tint-1: #b6a568;
+    --tint-2: #ab8570;
+    --tint-3: #e08a9a;
+
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -8px rgba(0,0,0,.5);
+  }
+
+  * { box-sizing: border-box; }
+  html { direction: rtl; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Assistant", "Noto Serif Hebrew", sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 6rem;
+  }
+
+  header.hero {
+    padding-bottom: 1.75rem;
+    border-bottom: 1px solid var(--paper-line);
+    margin-bottom: 1.75rem;
+  }
+  .eyebrow {
+    font-family: "Assistant", sans-serif;
+    font-size: .78rem;
+    font-weight: 600;
+    letter-spacing: .08em;
+    color: var(--ink-soft);
+    margin: 0 0 .6rem;
+  }
+  h1.title {
+    font-family: "Frank Ruhl Libre", "Noto Serif Hebrew", serif;
+    font-weight: 900;
+    font-size: clamp(2.6rem, 8vw, 3.6rem);
+    margin: 0 0 .5rem;
+    text-wrap: balance;
+    color: var(--ink);
+  }
+  .subtitle {
+    font-family: "Noto Serif Hebrew", serif;
+    font-size: 1.15rem;
+    color: var(--ink-soft);
+    margin: 0 0 1.4rem;
+    max-width: 42em;
+  }
+  .stat-row {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    font-family: "Assistant", sans-serif;
+  }
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: .1rem;
+  }
+  .stat b {
+    font-family: "Frank Ruhl Libre", serif;
+    font-size: 1.6rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--accent-strong);
+  }
+  .stat span {
+    font-size: .72rem;
+    color: var(--ink-soft);
+    letter-spacing: .04em;
+  }
+
+  nav.layers-nav {
+    display: flex;
+    gap: .6rem;
+    flex-wrap: wrap;
+    margin-bottom: 2.6rem;
+    position: sticky;
+    top: 0;
+    padding: .85rem 0;
+    background: var(--paper);
+    z-index: 5;
+  }
+  .nav-chip {
+    display: flex;
+    align-items: baseline;
+    gap: .4rem;
+    text-decoration: none;
+    background: var(--paper-raised);
+    border: 1px solid var(--paper-line);
+    border-inline-start: 3px solid var(--tint);
+    border-radius: .4rem;
+    padding: .45rem .85rem;
+    font-family: "Assistant", sans-serif;
+    font-weight: 600;
+    font-size: .92rem;
+    color: var(--ink);
+    transition: border-color .15s ease, background .15s ease;
+  }
+  .nav-chip:hover { background: var(--accent-tint); }
+  .nav-chip-count {
+    font-size: .74rem;
+    color: var(--ink-soft);
+    font-variant-numeric: tabular-nums;
+  }
+
+  section.layer {
+    margin-bottom: 3.2rem;
+    scroll-margin-top: 4.5rem;
+  }
+  .layer-head {
+    display: flex;
+    align-items: baseline;
+    gap: .75rem;
+    border-bottom: 2px solid var(--tint);
+    padding-bottom: .5rem;
+    margin-bottom: 1.2rem;
+  }
+  .layer-head h2 {
+    font-family: "Frank Ruhl Libre", serif;
+    font-weight: 700;
+    font-size: 1.7rem;
+    margin: 0;
+    display: flex;
+    align-items: baseline;
+    gap: .6rem;
+  }
+  .layer-index {
+    font-family: "Assistant", sans-serif;
+    font-size: .85rem;
+    font-weight: 700;
+    color: var(--tint);
+    font-variant-numeric: tabular-nums;
+  }
+  .layer-desc {
+    font-family: "Assistant", sans-serif;
+    font-size: .85rem;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  .cards {
+    display: flex;
+    flex-direction: column;
+    gap: .9rem;
+  }
+  .card {
+    background: var(--paper-raised);
+    border: 1px solid var(--paper-line);
+    border-radius: .6rem;
+    padding: 1.1rem 1.3rem;
+    box-shadow: var(--shadow);
+  }
+  .card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin-bottom: .55rem;
+  }
+  .ref {
+    font-family: "Assistant", sans-serif;
+    font-weight: 700;
+    font-size: .85rem;
+    color: var(--accent-strong);
+  }
+  .tags { display: flex; gap: .35rem; flex-wrap: wrap; }
+  .tag {
+    font-family: "Assistant", sans-serif;
+    font-size: .68rem;
+    font-weight: 600;
+    letter-spacing: .03em;
+    background: var(--tag-bg);
+    color: var(--tag-ink);
+    padding: .18rem .55rem;
+    border-radius: 1rem;
+  }
+  .content {
+    font-family: "Noto Serif Hebrew", serif;
+    font-size: 1.28rem;
+    line-height: 1.9;
+    margin: 0;
+    color: var(--ink);
+  }
+  .content[lang="arc"] { color: var(--ink-soft); }
+
+  footer.note {
+    border-top: 1px solid var(--paper-line);
+    padding-top: 1.5rem;
+    font-family: "Assistant", sans-serif;
+    font-size: .85rem;
+    color: var(--ink-soft);
+    line-height: 1.7;
+  }
+  footer.note b { color: var(--ink); }
+
+  @media (max-width: 520px) {
+    .wrap { padding: 1.6rem 1rem 4rem; }
+    .content { font-size: 1.14rem; }
+  }
+</style>
+
+<div class="wrap">
+  <header class="hero">
+    <p class="eyebrow">בית מדרש · סוגיה</p>
+    <h1 class="title">עדים זוממים</h1>
+    <p class="subtitle">דברים יט, טו–כא — עדות שקר וזמת עדים, מן התורה ועד התוספתא, שכבה אחר שכבה.</p>
+    <div class="stat-row">
+      <div class="stat"><b>37</b><span>מקורות</span></div>
+      <div class="stat"><b>4</b><span>שכבות מולאו</span></div>
+      <div class="stat"><b>ז&nbsp;–&nbsp;כא</b><span>דברים יט</span></div>
+    </div>
+  </header>
+
+  <nav class="layers-nav">
+    <a class="nav-chip" href="#tanakh" style="--tint:var(--tint-0)">
+        <span class="nav-chip-name">תנ&quot;ך</span>
+        <span class="nav-chip-count">7</span>
+      </a>
+<a class="nav-chip" href="#targumim" style="--tint:var(--tint-1)">
+        <span class="nav-chip-name">תרגומים</span>
+        <span class="nav-chip-count">14</span>
+      </a>
+<a class="nav-chip" href="#mishnah" style="--tint:var(--tint-2)">
+        <span class="nav-chip-name">משנה</span>
+        <span class="nav-chip-count">10</span>
+      </a>
+<a class="nav-chip" href="#tosefta" style="--tint:var(--tint-3)">
+        <span class="nav-chip-name">תוספתא</span>
+        <span class="nav-chip-count">6</span>
+      </a>
+  </nav>
+
+  <section class="layer" id="tanakh" style="--tint:var(--tint-0)">
+        <header class="layer-head">
+          <h2><span class="layer-index">01</span>תנ&quot;ך</h2>
+          <p class="layer-desc">המקור: שבעת הפסוקים בדברים יט</p>
+        </header>
+        <div class="cards">
+          <article class="card">
+          <div class="card-head">
+            <span class="ref">דברים יט, טו</span>
+            <div class="tags"><span class="tag">פשט</span><span class="tag">הלכה</span></div>
+          </div>
+          <p class="content">לֹֽא־יָקוּם֩ עֵ֨ד אֶחָ֜ד בְּאִ֗ישׁ לְכׇל־עָוֺן֙ וּלְכׇל־חַטָּ֔את בְּכׇל־חֵ֖טְא אֲשֶׁ֣ר יֶֽחֱטָ֑א עַל־פִּ֣י ׀ שְׁנֵ֣י עֵדִ֗ים א֛וֹ עַל־פִּ֥י שְׁלֹשָֽׁה־עֵדִ֖ים יָק֥וּם דָּבָֽר׃</p>
+        </article><article class="card">
+          <div class="card-head">
+            <span class="ref">דברים יט, טז</span>
+            <div class="tags"><span class="tag">פשט</span><span class="tag">הלכה</span></div>
+          </div>
+          <p class="content">כִּֽי־יָק֥וּם עֵד־חָמָ֖ס בְּאִ֑ישׁ לַעֲנ֥וֹת בּ֖וֹ סָרָֽה׃</p>
+        </article><article class="card">
+          <div class="card-head">
+            <span class="ref">דברים יט, יז</span>
+            <div class="tags"><span class="tag">פשט</span><span class="tag">הלכה</span></div>
+          </div>
+          <p class="content">וְעָמְד֧וּ שְׁנֵֽי־הָאֲנָשִׁ֛ים אֲשֶׁר־לָהֶ֥ם הָרִ֖יב לִפְנֵ֣י יְקֹוָ֑ק לִפְנֵ֤י הַכֹּֽהֲנִים֙ וְהַשֹּׁ֣פְטִ֔ים אֲשֶׁ֥ר יִהְי֖וּ בַּיָּמִ֥ים הָהֵֽם׃</p>
+        </article><article class="card">
+          <div class="card-head">
+            <span class="ref">דברים יט, יח</span>
+            <div class="tags"><span class="tag">פשט</span><span class="tag">הלכה</span></div>
+          </div>
+          <p class="content">וְדָרְשׁ֥וּ הַשֹּׁפְטִ֖ים הֵיטֵ֑ב וְהִנֵּ֤ה עֵֽד־שֶׁ֙קֶר֙ הָעֵ֔ד שֶׁ֖קֶר עָנָ֥ה בְאָחִֽיו׃</p>
+        </article><article class="card">
+          <div class="card-head">
+            <span class="ref">דברים יט, יט</span>
+            <div class="tags"><span class="tag">פשט</span><span class="tag">הלכה</span></div>
+          </div>
+          <p class="content">וַעֲשִׂ֣יתֶם ל֔וֹ כַּאֲשֶׁ֥ר זָמַ֖ם לַעֲשׂ֣וֹת לְאָחִ֑יו וּבִֽעַרְתָּ֥ הָרָ֖ע מִקִּרְבֶּֽךָ׃</p>
+        </article><article class="card">
+          <div class="card-head">
+            <span class="ref">דברים יט, כ</span>
+            <div class="tags"><span class="tag">פשט</span><span class="tag">הלכה</span></div>
+          </div>
+          <p class="content">וְהַנִּשְׁאָרִ֖ים יִשְׁמְע֣וּ וְיִרָ֑אוּ וְלֹֽא־יֹסִ֨פוּ לַעֲשׂ֜וֹת ע֗וֹד כַּדָּבָ֥ר הָרָ֛ע הַזֶּ֖ה בְּקִרְבֶּֽךָ׃</p>
+        </article><article class="card">
+          <div class="card-head">
+            <span class="ref">דברים יט, כא</span>
+            <div class="tags"><span class="tag">פשט</span><span class="tag">הלכה</span></div>
+          </div>
+          <p class="content">וְלֹ֥א תָח֖וֹס עֵינֶ֑ךָ נֶ֣פֶשׁ בְּנֶ֗פֶשׁ עַ֤יִן בְּעַ֙יִן֙ שֵׁ֣ן בְּשֵׁ֔ן יָ֥ד בְּיָ֖ד רֶ֥גֶל בְּרָֽגֶל׃ {ס} -</p>
+        </article>
+        </div>
+      </section>
+<section class="layer" id="targumim" style="--tint:var(--tint-1)">
+        <header class="layer-head">
+          <h2><span class="layer-index">02</span>תרגומים</h2>
+          <p class="layer-desc">תרגום אונקלוס ותרגום יונתן, מילה במילה</p>
+        </header>
+        <div class="cards">
+          <article class="card">
+          <div class="card-head">
+            <span class="ref">תרגום אונקלוס, דברים יט, טו</span>
+            <div class="tags"><span class="tag">פשט</span><span class="tag">הלכה</span></div>
+          </div>
+          <p class="content" lang="arc">לָא יְקוּם סָהִיד חַד בִּגְבַר לְכָל עַוָּיָן וּלְכָל חוֹבִין בְּכָל חֵט דִּי יֶחְטָא עַל מֵימַר תְּרֵין סָהֲדִין אוֹ עַל מֵימַר תְּלָתָא סָהֲדִין יִתְקַיַּם פִּתְגָּמָא:</p>
+        </article><article class="card">
+          <div class="card-head">
+            <span class="ref">תרגום אונקלוס, דברים יט, טז</span>
+            <div class="tags"><span class="tag">פשט</span><span class="tag">הלכה</span></div>
+          </div>
+          <p class="content" lang="arc">אֲרֵי יְקוּם סָהִיד שְׁקַר בִּגְבָר &lt;b&gt;לְאַסְהָדָא&lt;/b&gt; בֵיהּ סַטְיָא:</p>
+        </article><article class="card">
+          <div class="card-head">
+            <span class="ref">תרגום אונקלוס, דברים יט, יז</span>
+            <div class="tags"><span class="tag">פשט</span><span class="tag">הלכה</span></div>
+          </div>
+          <p class="content" lang="arc">וִיקוּמוּן תְּרֵין גֻּבְרִין דִּי לְהוֹן דִּינָא קֳדָם יְיָ קֳדָם כָּהֲנַיָּא וְדַיָּנַיָּא דִּי יְהוֹן בְּיוֹמַיָּא הָאִנּוּן:</p>
+        </article><article class="card">
+          <div class="card-head">
+            <span class="ref">תרגום אונקלוס, דברים יט, יח</span>
+            <div class="tags"><span class="tag">פשט</span><span class="tag">הלכה</span></div>
+          </div>
+          <p class="content" lang="arc">וְיִתְבְּעוּן דַּיָּנַיָּא יָאוּת וְהָא סָהִיד שְׁקַר סָהֲדָא שִׁקְרָא אַסְהַד בַּאֲחוֹהִי:</p>
+        </article><article class="card">
+          <div class="card-head">
+            <span class="ref">תרגום אונקלוס, דברים יט, יט</span>
+            <div class="tags"><span class="tag">פשט</span><span class="tag">הלכה</span></div>
+          </div>
+          <p class="content" lang="arc">וְתַעְבְּדוּן לֵיהּ כְּמָא דִי חַשִּׁיב לְמֶעְבַּד לַאֲחוֹהִי וּתְפַלֵּי &lt;b&gt;עָבֵד&lt;/b&gt; דְּבִישׁ מִבֵּינָךְ:</p>
+        </article><article class="card">
+          <div class="card-head">
+            <span class="ref">תרגום אונקלוס, דברים יט, כ</span>
+            <div class="tags"><span class="tag">פשט</span><span class="tag">הלכה</span></div>
+          </div>
+          <p class="content" lang="arc">וּדְיִשְׁתָּאֲרוּן יִשְׁמְעוּן וְיִדְחֲלוּן וְלָא יוֹסְפוּן לְמֶעְבַּד עוֹד כְּפִתְגָּמָא בִישָׁא הָדֵין בֵּינָךְ:</p>
+        </article><article class="card">
+          <div class="card-head">
+            <span class="ref">תרגום אונקלוס, דברים יט, כא</span>
+            <div class="tags"><span class="tag">פשט</span><span class="tag">הלכה</span></div>
+          </div>
+          <p class="content" lang="arc">וְלָא תְחוּס עֵינָךְ נַפְשָׁא חֳלַף נַפְשָׁא עֵינָא חֳלַף עֵינָא שִׁנָּא חֳלַף שִׁנָּא יְדָא חֳלַף יְדָא רַגְלָא חֳלַף רַגְלָא:</p>
+        </article><article class="card">
+          <div class="card-head">
+            <span class="ref">תרגום יונתן, דברים יט, טו</span>
+            <div class="tags"><span class="tag">פשט</span><span class="tag">הלכה</span></div>
+          </div>
+          <p class="content" lang="arc">לָא יִתְקַיֵּים סַהֲדוּ דְּחַד בִּגְבַר לְכָל סָרְחָן נְפָשׁ וּלְכָל חוֹב מָמוֹן וּלְכָל חֵט דְּיֶחֱטֵי בְּרַם עַל מֵימְרָא דַיְיָ לְמִתְפַּרְעָא עַל טוּמְרַיָא עַל מַיָא סָהִיד חָד יוֹמֵי לְמִכְפּוֹר יַת מַה דְּמַסְהִיד עֲלוֹי וְעַל מֵימַר תְּרֵין סַהֲדִין אוֹ תְּלָתָא סַהֲדִין יִתְקַיֵּים פִּתְגָּמָא</p>
+        </article><article class="card">
+          <div class="card-head">
+            <span class="ref">תרגום יונתן, דברים יט, טז</span>
+            <div class="tags"><span class="tag">פשט</span><span class="tag">הלכה</span></div>
+          </div>
+          <p class="content" lang="arc">אֲרוּם יְקוּמוּן סַהֲדִין שִׁיקְרִין בְּבַר נַשׁ לְאַסְהָדָא בֵּיהּ סַטְיָא</p>
+        </article><article class="card">
+          <div class="card-head">
+            <span class="ref">תרגום יונתן, דברים יט, יז</span>
+            <div class="tags"><span class="tag">פשט</span><span class="tag">הלכה</span></div>
+          </div>
+          <p class="content" lang="arc">וִיקוּמוּן תְּרֵין גּוּבְרִין דִּלְהוֹן תִּיגְרָא קֳדָם יְיָ קֳדָם כַּהֲנַיָא דַיָינַיָא דִיהוֹן בְּיוֹמַיָא הָאִינוּן</p>
+        </article><article class="card">
+          <div class="card-head">
+            <span class="ref">תרגום יונתן, דברים יט, יח</span>
+            <div class="tags"><span class="tag">פשט</span><span class="tag">הלכה</span></div>
+          </div>
+          <p class="content" lang="arc">וְיִתְבְּעוּן דַּיָינַיָא לְסַהֲדִין דְּמַזְמִין יַתְהוֹן טָבְאוּת וְהָא סַהֲדוּ דִשְׁקַר בְּפוּם סַהֲדִין שִׁיקְרָא אַסְהִידוּ בַּאֲחוּהוֹן</p>
+        </article><article class="card">
+          <div class="card-head">
+            <span class="ref">תרגום יונתן, דברים יט, יט</span>
+            <div class="tags"><span class="tag">פשט</span><span class="tag">הלכה</span></div>
+          </div>
+          <p class="content" lang="arc">וְתַעַבְדוּן לְהוֹן הֵיכְמָא דַחֲשִׁיבוּ לְמֶעֱבַד לַאֲחוּהוֹן וּתְפַלוּן עַבְדֵי דְבִישׁ מִבֵּינֵיכוֹן</p>
+        </article><article class="card">
+          <div class="card-head">
+            <span class="ref">תרגום יונתן, דברים יט, כ</span>
+            <div class="tags"><span class="tag">פשט</span><span class="tag">הלכה</span></div>
+          </div>
+          <p class="content" lang="arc">וְרַשִׁיעַיָא דְמִשְׁתַּיְירִין יִשְׁמְעוּן וִידַחֲלוּן וְלָא יוֹסְפוּן לְמֶעֱבַד תּוּב כְּפִתְגָמָא בִּישָׁא הָדֵין בֵּינֵיכוֹן</p>
+        </article><article class="card">
+          <div class="card-head">
+            <span class="ref">תרגום יונתן, דברים יט, כא</span>
+            <div class="tags"><span class="tag">פשט</span><span class="tag">הלכה</span></div>
+          </div>
+          <p class="content" lang="arc">וְלָא תֵיחוֹס עֵינֵיכוֹן נַפְשָׁא חֲלוּפֵי נַפְשָׁא דְמֵי עֵינָא חוּלַף עֵינָא דְמֵי שִׁינָא חוּלַף שִׁינָא דְמֵי יְדָא חוּלַף יְדָא דְמֵי רִיגְלָא חוּלַף רִיגְלָא</p>
+        </article>
+        </div>
+      </section>
+<section class="layer" id="mishnah" style="--tint:var(--tint-2)">
+        <header class="layer-head">
+          <h2><span class="layer-index">03</span>משנה</h2>
+          <p class="layer-desc">מכות, פרק א׳ — עשר משניות</p>
+        </header>
+        <div class="cards">
+          <article class="card">
+          <div class="card-head">
+            <span class="ref">משנה מכות א, א</span>
+            <div class="tags"><span class="tag">פשט</span><span class="tag">הלכה</span></div>
+          </div>
+          <p class="content">כֵּיצַד הָעֵדִים נַעֲשִׂים זוֹמְמִין, מְעִידִין אָנוּ בְאִישׁ פְּלוֹנִי שֶׁהוּא בֶן גְּרוּשָׁה אוֹ בֶן חֲלוּצָה, אֵין אוֹמְרִים יֵעָשֶׂה זֶה בֶן גְּרוּשָׁה אוֹ בֶן חֲלוּצָה תַחְתָּיו, אֶלָּא לוֹקֶה אַרְבָּעִים. מְעִידִין אָנוּ בְאִישׁ פְּלוֹנִי שֶׁהוּא חַיָּב לִגְלוֹת, אֵין אוֹמְרִים יִגְלֶה זֶה תַחְתָּיו, אֶלָּא לוֹקֶה אַרְבָּעִים. מְעִידִין אָנוּ בְאִישׁ פְּלוֹנִי שֶׁגֵּרַשׁ אֶת אִשְׁתּוֹ וְלֹא נָתַן לָהּ כְּתֻבָּתָהּ, וַהֲלֹא בֵּין הַיּוֹם וּבֵין לְמָחָר סוֹפוֹ לִתֵּן לָהּ כְּתֻבָּתָהּ, אוֹמְדִין כַּמָּה אָדָם רוֹצֶה לִתֵּן בִּכְתֻבָּתָהּ שֶׁל זוֹ, שֶׁאִם נִתְאַלְמְנָה אוֹ נִתְגָּרְשָׁה, וְאִם מֵתָה יִירָשֶׁנָּה בַעְלָהּ. מְעִידִין אָנוּ בְאִישׁ פְּלוֹנִי שֶׁהוּא חַיָּב לַחֲבֵרוֹ אֶלֶף זוּז עַל מְנָת לִתְּנָן לוֹ מִכָּאן וְעַד שְׁלשִׁים יוֹם, וְהוּא אוֹמֵר מִכָּאן וְעַד עֶשֶׂר שָׁנִים, אוֹמְדִין כַּמָּה אָדָם רוֹצֶה לִתֵּן וְיִהְיוּ בְיָדוֹ אֶלֶף זוּז, בֵּין נוֹתְנָן מִכָּאן וְעַד שְׁלשִׁים יוֹם, בֵּין נוֹתְנָן מִכָּאן וְעַד עֶשֶׂר שָׁנִים:</p>
+        </article><article class="card">
+          <div class="card-head">
+            <span class="ref">משנה מכות א, ב</span>
+            <div class="tags"><span class="tag">פשט</span><span class="tag">הלכה</span></div>
+          </div>
+          <p class="content">מְעִידִין אָנוּ בְאִישׁ פְּלוֹנִי שֶׁחַיָּב לַחֲבֵרוֹ מָאתַיִם זוּז, וְנִמְצְאוּ זוֹמְמִין, לוֹקִין וּמְשַׁלְּמִין, שֶׁלֹּא הַשֵּׁם הַמְבִיאוֹ לִידֵי מַכּוֹת, מְבִיאוֹ לִידֵי תַשְׁלוּמִין, דִּבְרֵי רַבִּי מֵאִיר. וַחֲכָמִים אוֹמְרִים, כָּל הַמְשַׁלֵּם אֵינוֹ לוֹקֶה:</p>
+        </article><article class="card">
+          <div class="card-head">
+            <span class="ref">משנה מכות א, ג</span>
+            <div class="tags"><span class="tag">פשט</span><span class="tag">הלכה</span></div>
+          </div>
+          <p class="content">מְעִידִין אָנוּ בְאִישׁ פְּלוֹנִי שֶׁהוּא חַיָּב מַלְקוּת אַרְבָּעִים, וְנִמְצְאוּ זוֹמְמִין, לוֹקִין שְׁמֹנִים, מִשּׁוּם לֹא תַעֲנֶה בְרֵעֲךָ עֵד שָׁקֶר (שמות כ), וּמִשּׁוּם וַעֲשִׂיתֶם לוֹ כַּאֲשֶׁר זָמַם (דברים יט), דִּבְרֵי רַבִּי מֵאִיר. וַחֲכָמִים אוֹמְרִים, אֵינָן לוֹקִין אֶלָּא אַרְבָּעִים. מְשַׁלְּשִׁין בְּמָמוֹן וְאֵין מְשַׁלְּשִׁין בְּמַכּוֹת. כֵּיצַד, הֱעִידוּהוּ שֶׁהוּא חַיָּב לַחֲבֵרוֹ מָאתַיִם זוּז, וְנִמְצְאוּ זוֹמְמִין, מְשַׁלְּשִׁין בֵּינֵיהֶם. אֲבָל אִם הֱעִידוּהוּ שֶׁהוּא חַיָּב מַלְקוּת אַרְבָּעִים, וְנִמְצְאוּ זוֹמְמִין, כָּל אֶחָד וְאֶחָד לוֹקֶה אַרְבָּעִים:</p>
+        </article><article class="card">
+          <div class="card-head">
+            <span class="ref">משנה מכות א, ד</span>
+            <div class="tags"><span class="tag">פשט</span><span class="tag">הלכה</span></div>
+          </div>
+          <p class="content">אֵין הָעֵדִים נַעֲשִׂים זוֹמְמִין עַד שֶׁיָּזוֹמוּ אֶת עַצְמָן. כֵּיצַד, אָמְרוּ מְעִידִין אָנוּ בְאִישׁ פְּלוֹנִי שֶׁהָרַג אֶת הַנֶּפֶשׁ, אָמְרוּ לָהֶן הֵיאַךְ אַתֶּם מְעִידִין, שֶׁהֲרֵי נֶהֱרָג זֶה אוֹ הַהוֹרֵג הָיָה עִמָּנוּ אוֹתוֹ הַיּוֹם בְּמָקוֹם פְּלוֹנִי, אֵין אֵלּוּ זוֹמְמִין. אֲבָל אָמְרוּ לָהֶם הֵיאַךְ אַתֶּם מְעִידִין, שֶׁהֲרֵי אַתֶּם הֱיִיתֶם עִמָּנוּ אוֹתוֹ הַיּוֹם בְּמָקוֹם פְּלוֹנִי, הֲרֵי אֵלּוּ זוֹמְמִין, וְנֶהֱרָגִין עַל פִּיהֶם:</p>
+        </article><article class="card">
+          <div class="card-head">
+            <span class="ref">משנה מכות א, ה</span>
+            <div class="tags"><span class="tag">פשט</span><span class="tag">הלכה</span></div>
+          </div>
+          <p class="content">בָּאוּ אֲחֵרִים וְהִזִּימוּם, בָּאוּ אֲחֵרִים וְהִזִּימוּם, אֲפִלּוּ מֵאָה, כֻּלָּם יֵהָרֵגוּ. רַבִּי יְהוּדָה אוֹמֵר, אִסְטָסִית הִיא זוֹ, וְאֵינָהּ נֶהֱרֶגֶת אֶלָּא כַת הָרִאשׁוֹנָה בִלְבָד:</p>
+        </article><article class="card">
+          <div class="card-head">
+            <span class="ref">משנה מכות א, ו</span>
+            <div class="tags"><span class="tag">פשט</span><span class="tag">הלכה</span></div>
+          </div>
+          <p class="content">אֵין הָעֵדִים זוֹמְמִין נֶהֱרָגִין, עַד שֶׁיִּגָּמֵר הַדִּין, שֶׁהֲרֵי הַצְּדוֹקִין אוֹמְרִים, עַד שֶׁיֵּהָרֵג, שֶׁנֶּאֱמַר נֶפֶשׁ תַּחַת נָפֶשׁ. אָמְרוּ לָהֶם חֲכָמִים, וַהֲלֹא כְבָר נֶאֱמַר (דברים יט) וַעֲשִׂיתֶם לוֹ כַּאֲשֶׁר זָמַם לַעֲשׂוֹת לְאָחִיו, וַהֲרֵי אָחִיו קַיָּם. וְאִם כֵּן לָמָּה נֶאֱמַר נֶפֶשׁ תַּחַת נָפֶשׁ, יָכוֹל מִשָּׁעָה שֶׁקִּבְּלוּ עֵדוּתָן יֵהָרֵגוּ, תַּלְמוּד לוֹמַר, נֶפֶשׁ תַּחַת נָפֶשׁ, הָא אֵינָן נֶהֱרָגִין עַד שֶׁיִּגָּמֵר הַדִּין:</p>
+        </article><article class="card">
+          <div class="card-head">
+            <span class="ref">משנה מכות א, ז</span>
+            <div class="tags"><span class="tag">פשט</span><span class="tag">הלכה</span></div>
+          </div>
+          <p class="content">עַל פִּי שְׁנַיִם עֵדִים אוֹ שְׁלשָׁה עֵדִים יוּמַת הַמֵּת (שם יז), אִם מִתְקַיֶּמֶת הָעֵדוּת בִּשְׁנַיִם, לָמָּה פָרַט הַכָּתוּב בִּשְׁלשָׁה, אֶלָּא לְהַקִּישׁ שְׁלשָׁה לִשְׁנַיִם, מַה שְּׁלשָׁה מַזִּימִין אֶת הַשְּׁנַיִם, אַף הַשְּׁנַיִם יָזוֹמּוֹ אֶת הַשְּׁלשָׁה. וּמִנַּיִן אֲפִלּוּ מֵאָה, תַּלְמוּד לוֹמַר, עֵדִים. רַבִּי שִׁמְעוֹן אוֹמֵר, מַה שְּׁנַיִם אֵינָן נֶהֱרָגִין עַד שֶׁיְּהוּ שְׁנֵיהֶם זוֹמְמִין, אַף שְׁלשָׁה אֵינָן נֶהֱרָגִין עַד שֶׁיִּהְיוּ שְׁלָשְׁתָּן זוֹמְמִין. וּמִנַּיִן אֲפִלּוּ מֵאָה, תַּלְמוּד לוֹמַר, עֵדִים. רַבִּי עֲקִיבָא אוֹמֵר, לֹא בָא הַשְּׁלִישִׁי אֶלָּא לְהַחְמִיר עָלָיו וְלַעֲשׂוֹת דִּינוֹ כַיּוֹצֵא בָאֵלּוּ. וְאִם כֵּן עָנַשׁ הַכָּתוּב לַנִּטְפָּל לְעוֹבְרֵי עֲבֵרָה כְעוֹבְרֵי עֲבֵרָה, עַל אַחַת כַּמָּה וְכַמָּה יְשַׁלֵּם שָׂכָר לַנִּטְפָּל לְעוֹשֵׂי מִצְוָה כְעוֹשֵׂי מִצְוָה:</p>
+        </article><article class="card">
+          <div class="card-head">
+            <span class="ref">משנה מכות א, ח</span>
+            <div class="tags"><span class="tag">פשט</span><span class="tag">הלכה</span></div>
+          </div>
+          <p class="content">מַה שְּׁנַיִם נִמְצָא אַחַד מֵהֶן קָרוֹב אוֹ פָסוּל עֵדוּתָן בְּטֵלָה, אַף שְׁלשָׁה נִמְצָא אֶחָד מֵהֶן קָרוֹב אוֹ פָסוּל, עֵדוּתָן בְּטֵלָה. מִנַּיִן אֲפִלּוּ מֵאָה, תַּלְמוּד לוֹמַר, עֵדִים. אָמַר רַבִּי יוֹסֵי, בַּמֶּה דְבָרִים אֲמוּרִים, בְּדִינֵי נְפָשׁוֹת. אֲבָל בְּדִינֵי מָמוֹנוֹת, תִּתְקַיֵּם הָעֵדוּת בַּשְּׁאָר. רַבִּי אוֹמֵר, אֶחָד דִּינֵי מָמוֹנוֹת וְאֶחָד דִּינֵי נְפָשׁוֹת. בִּזְמַן שֶׁהִתְרוּ בָהֶן, אֲבָל בִּזְמַן שֶׁלֹּא הִתְרוּ בָהֶן, מַה יַּעֲשׂוּ שְׁנֵי אַחִין שֶׁרָאוּ בְאֶחָד שֶׁהָרַג אֶת הַנָּפֶשׁ:</p>
+        </article><article class="card">
+          <div class="card-head">
+            <span class="ref">משנה מכות א, ט</span>
+            <div class="tags"><span class="tag">פשט</span><span class="tag">הלכה</span></div>
+          </div>
+          <p class="content">הָיוּ שְׁנַיִם רוֹאִין אוֹתוֹ מֵחַלּוֹן זֶה וּשְׁנַיִם רוֹאִין אוֹתוֹ מֵחַלּוֹן זֶה וְאֶחָד מַתְרֶה בוֹ בָּאֶמְצַע, בִּזְמַן שֶׁמִּקְצָתָן רוֹאִין אֵלּוּ אֶת אֵלּוּ, הֲרֵי אֵלּוּ עֵדוּת אַחַת. וְאִם לָאו, הֲרֵי אֵלּוּ שְׁתֵּי עֵדֻיּוֹת. לְפִיכָךְ אִם נִמְצֵאת אַחַת מֵהֶן זוֹמֶמֶת, הוּא וָהֵן נֶהֱרָגִין וְהַשְּׁנִיָּה פְּטוּרָה. רַבִּי יוֹסֵי אוֹמֵר, לְעוֹלָם אֵין נֶהֱרָגִין עַד שֶׁיְּהוּ פִּי שְׁנֵי עֵדָיו מַתְרִין בּוֹ, שֶׁנֶּאֱמַר (דברים יז) עַל פִּי שְׁנַיִם עֵדִים. דָּבָר אַחֵר, עַל פִּי שְׁנַיִם עֵדִים, שֶׁלֹּא תְהֵא סַנְהֶדְרִין שׁוֹמַעַת מִפִּי הַתֻּרְגְּמָן:</p>
+        </article><article class="card">
+          <div class="card-head">
+            <span class="ref">משנה מכות א, י</span>
+            <div class="tags"><span class="tag">פשט</span><span class="tag">הלכה</span></div>
+          </div>
+          <p class="content">מִי שֶׁנִּגְמַר דִּינוֹ וּבָרַח וּבָא לִפְנֵי אוֹתוֹ בֵית דִּין, אֵין סוֹתְרִים אֶת דִּינוֹ. כָּל מָקוֹם שֶׁיַּעַמְדוּ שְׁנַיִם וְיֹאמְרוּ, מְעִידִין אָנוּ בְאִישׁ פְּלוֹנִי שֶׁנִּגְמַר דִּינוֹ בְּבֵית דִּינוֹ שֶׁל פְּלוֹנִי, וּפְלוֹנִי וּפְלוֹנִי עֵדָיו, הֲרֵי זֶה יֵהָרֵג. סַנְהֶדְרִין נוֹהֶגֶת בָּאָרֶץ וּבְחוּצָה לָאָרֶץ. סַנְהֶדְרִין הַהוֹרֶגֶת אֶחָד בְּשָׁבוּעַ נִקְרֵאת חָבְלָנִית. רַבִּי אֶלְעָזָר בֶּן עֲזַרְיָה אוֹמֵר, אֶחָד לְשִׁבְעִים שָׁנָה. רַבִּי טַרְפוֹן וְרַבִּי עֲקִיבָא אוֹמְרִים, אִלּוּ הָיִינוּ בַסַּנְהֶדְרִין לֹא נֶהֱרַג אָדָם מֵעוֹלָם. רַבָּן שִׁמְעוֹן בֶּן גַּמְלִיאֵל אוֹמֵר, אַף הֵן מַרְבִּין שׁוֹפְכֵי דָמִים בְּיִשְׂרָאֵל:</p>
+        </article>
+        </div>
+      </section>
+<section class="layer" id="tosefta" style="--tint:var(--tint-3)">
+        <header class="layer-head">
+          <h2><span class="layer-index">04</span>תוספתא</h2>
+          <p class="layer-desc">מכות, פרק א׳ — שש הלכות</p>
+        </header>
+        <div class="cards">
+          <article class="card">
+          <div class="card-head">
+            <span class="ref">תוספתא מכות א, א</span>
+            <div class="tags"><span class="tag">פשט</span><span class="tag">הלכה</span></div>
+          </div>
+          <p class="content">עד זומם אין נמכר בזממו ר&quot;ע אומר אף אין משלם ע&quot;פ עצמו מפני שהוא קנס וכל דבר שהוא קנס אין משלם ע&quot;פ עצמו העדים שאמרו מעידים אנו באיש פלוני שלוה מפלוני אלף זוז ביום פלוני במקום פלוני ובאו אחרים ואמרו להן היאך אתם מעידים שהרי המלוה או הלוה היה עמנו אותו היום במקום פלוני אין אלו זוממין אבל עדותן בטלה אבל אמרו להם היאך אתם מעידין שהרי אתם הייתם עמנו היום במקום פלוני הרי אלו זוממין ומשלמין על פיהם.</p>
+        </article><article class="card">
+          <div class="card-head">
+            <span class="ref">תוספתא מכות א, ב</span>
+            <div class="tags"><span class="tag">פשט</span><span class="tag">הלכה</span></div>
+          </div>
+          <p class="content">היו חותמים על השטר בא&#x27; בניסן בשמיטה ובאו אחרים ואמרו להם היאך אתם חתומין על השטר זה שהרי אתם הייתם עמנו היום במקום פלוני עדותן כשרה והשטר כשר שאני אומר שמא איחר זמנו של שטר וכתבו שטר שזמנו בשבת או בעשרה בתשרי ר&#x27; יהודה מכשיר ור&#x27; יוסי פוסל א&quot;ל ר&#x27; יהודה מעשה שבא לפניך והכשרת א&quot;ל ר&#x27; יוסי אני לא הכשרתי ואם הכשרתי הכשרתי.</p>
+        </article><article class="card">
+          <div class="card-head">
+            <span class="ref">תוספתא מכות א, ג</span>
+            <div class="tags"><span class="tag">פשט</span><span class="tag">הלכה</span></div>
+          </div>
+          <p class="content">העדים שאמרו מעידין אנו באיש פלוני שסימא את עין עבדו ואח&quot;כ הפיל את שינו שכן הרב אומר ואח&quot;כ נמצאו זוממין משלמין לעבד הפיל את שינו ואח&quot;כ סימא את עינו שכן העבדים אומרים ונמצאו זוממין משלמין לרב סימא שתיהן כאחת והפיל שינו כאחת ובאו אחרים ואמרו לא כי אלא שתיהן זו אחר זו ונמצאו זוממין משלמין לעבד סימא שתיהן זו אחר זו והפיל שתיהן זו אחר זו ובאו אחרים ואמרו לא כי אלא שתיהן כא&#x27; ונמצאו זוממין משלמין דמי עבד הסומא לרב סימא את עין עבדו והרי הוא תחתיו ומשמשו ונמצאו זוממין משלמין דמי עבד הסומא לרב.</p>
+        </article><article class="card">
+          <div class="card-head">
+            <span class="ref">תוספתא מכות א, ד</span>
+            <div class="tags"><span class="tag">פשט</span><span class="tag">הלכה</span></div>
+          </div>
+          <p class="content">העדים שאמרו מעידין אנו באיש פלוני שגירש את אשתו ולא נתן לה כתובתה שכן האשה אמרה ונמצאו זוממין משלמין דמי כתובתה לאיש גירש את אשתו ונתן לה כתובתה שכן האיש אומר ונמצאו זוממין משלמין דמי כתובה לאשה גירש את אשתו ולא נתן לה כתובתה והרי היא תחתיו ומשמשתו ונמצאו זוממין אין אומרין ישלמו לה כתובתה אלא טובת הנאת כתובה וכי מה היא טובת הנאת כתובה אין אומרין כמה אדם רוצה ליתן בכתובתה של זו שאם תמות בחיי בעלה בעלה יורשה לאחר מיתת בעלה יורשת כתובתה ואין יורשין אותה לפיכך הן משלמים.</p>
+        </article><article class="card">
+          <div class="card-head">
+            <span class="ref">תוספתא מכות א, ה</span>
+            <div class="tags"><span class="tag">פשט</span><span class="tag">הלכה</span></div>
+          </div>
+          <p class="content">העדים שאמרו מעידים אנו באיש פלוני שגנב חלבו של חבירו ולא אכלו גנב נבלתו של חבירו ולא אכלה ונמצאו זוממין לוקין ומשלמין שעל מנת כן העידוהו ע&quot;מ שילקה וישלם גנב חלבו של חבירו ואכלו גנב נבלתו של חבירו ואכלה הרי זה לוקה וחייב בתשלומין שבעסקי ממון הוא אומר (שמות כ׳:י״ג) לא תענה ברעך עד שקר ושבעסקי מכות הוא אומר (דברים י״ט:י״ט) ועשיתם לו כאשר זמם לעשות דברי ר&quot;מ וחכ&quot;א (דברים כ״ה:ב׳) כדי רשעתו מת אינו משלם לוקה אינו משלם מודים חכמים לר&quot;מ שאם העידוהו שהוא בן גרושה או בן חלוצה נתין וממזר שהם לוקין את הארבעים.</p>
+        </article><article class="card">
+          <div class="card-head">
+            <span class="ref">תוספתא מכות א, ו</span>
+            <div class="tags"><span class="tag">פשט</span><span class="tag">הלכה</span></div>
+          </div>
+          <p class="content">מאימתי זוממין חייבין לשלם משתתפרש עדותן בב&quot;ד נמצא חייב לו מן הדין לפיכך הוא משלם שנים נמצא אחד מהם קרוב או פסול עדותן בטלה ומנין אפילו מאה ת&quot;ל עדים. מעידים [אנו] באיש פלוני שהרג את הנפש ובאו אחרים והזימום הנדון פטור כת הראשונה חייבת ובאו אחרים והזימום הנדון חייב כת הראשונה פטורה וכת השניה חייבת כת אחת נכנסת וכת אחת יוצאה אפי&#x27; הם מאה כולן פטורין ר&#x27; יהודה אומר איצטניסית היא זו ואין נהרגת אלא כת הראשונה בלבד א&quot;ר יוסי בד&quot;א בדיני נפשות אבל בדיני ממונות תתקיים עדות בשאר [עדים] ור&#x27; אומר אף בדיני ממונות כן והוא לא שיש להן קרוב או פסול תתקיים עדות בשאר עדים ור&#x27; דוסתאי בן יהודה אומר עדים זוממין שבאו אחרים והזימום זוממיהן פטורים עד זומם פסול מכל עדיות שבתורה דברי ר&#x27; יהודה אמר ר&#x27; יוסי בד&quot;א בזמן שהוזם לעדות נפשות אבל לא הוזם אלא לעדות ממון אין פסול אלא לאותו העדות בלבד.</p>
+        </article>
+        </div>
+      </section>
+
+  <footer class="note">
+    <p><b>על העמוד הזה:</b> תמונת מצב סטטית של מסד הנתונים כפי שהוא היום. כל טקסט מוצג כאן בלשונו המקורית, בלי כל תוספת או פרשנות. תרגום אונקלוס ותרגום יונתן ותוספתא מכות פרק א׳ נשלפו מאוצריא (מבוסס על Sefaria ו-Dicta); שאר הטקסטים הוזנו במפורש.</p>
+    <p><b>עוד לא נכנס לכאן:</b> גמרא מכות ורש״י (ממתינים לאיתור גבול פרק א׳ המדויק), ופרשני הפסוקים (רש״י, רמב״ן, אבן עזרא ועוד — כבר אותרו, טרם הוזנו).</p>
+  </footer>
+</div>
